@@ -130,7 +130,7 @@ class IndexTab(ttk.Frame):
 
         self._name_lbl = ttk.Label(self._detail_body, style="Surface.H2.TLabel",
                                    wraplength=280, justify="left")
-        self._name_lbl.pack(anchor="w", **pad, pady=(20, 2))
+        self._name_lbl.pack(anchor="w", padx=20, pady=(20, 2))
 
         self._type_badge = tk.Label(self._detail_body, text="",
                                     bg=C["bg_surface"], fg=C["text"],
