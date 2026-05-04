@@ -41,18 +41,22 @@ class CollectionTab(ttk.Frame):
         frame.rowconfigure(0, weight=1)
         frame.columnconfigure(0, weight=1)
 
-        cols = ("name", "series", "type", "qty")
+        cols = ("bb", "name", "era", "series", "type", "qty")
         self._tree = ttk.Treeview(frame, columns=cols, show="headings",
                                   selectmode="browse")
-        self._tree.heading("name",   text="Name",     anchor="w")
-        self._tree.heading("series", text="Series",   anchor="w")
-        self._tree.heading("type",   text="Type",     anchor="center")
-        self._tree.heading("qty",    text="Qty",      anchor="center")
+        self._tree.heading("bb",     text="BB #",   anchor="w")
+        self._tree.heading("name",   text="Name",   anchor="w")
+        self._tree.heading("era",    text="Era",    anchor="w")
+        self._tree.heading("series", text="Series", anchor="w")
+        self._tree.heading("type",   text="Type",   anchor="center")
+        self._tree.heading("qty",    text="Qty",    anchor="center")
 
-        self._tree.column("name",   width=280, stretch=True,  anchor="w")
-        self._tree.column("series", width=130, stretch=False, anchor="w")
-        self._tree.column("type",   width=80,  stretch=False, anchor="center")
-        self._tree.column("qty",    width=60,  stretch=False, anchor="center")
+        self._tree.column("bb",     width=72,  stretch=False, anchor="w")
+        self._tree.column("name",   width=220, stretch=True,  anchor="w")
+        self._tree.column("era",    width=90,  stretch=False, anchor="w")
+        self._tree.column("series", width=115, stretch=False, anchor="w")
+        self._tree.column("type",   width=72,  stretch=False, anchor="center")
+        self._tree.column("qty",    width=50,  stretch=False, anchor="center")
 
         for t, col in TYPE_COLOR.items():
             self._tree.tag_configure(t, foreground=col)
@@ -131,7 +135,8 @@ class CollectionTab(ttk.Frame):
         for i, e in enumerate(self._entries):
             tags = (e.bey_type, "even" if i % 2 == 0 else "odd")
             self._tree.insert("", "end", iid=str(e.id),
-                              values=(e.name, e.series, e.bey_type, e.quantity),
+                              values=(e.bb_number, e.name, e.era,
+                                      e.series, e.bey_type, e.quantity),
                               tags=tags)
 
     def _refresh_summary(self):
